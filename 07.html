@@ -1,0 +1,266 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The Illusion of Identity - The Easy Way to Stop Binge-Watching</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Easy Way to Stop Binge-Watching</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>7: The Illusion of Identity</p>
+<p>So tell me — when did you first become a "TV person"?</p>
+<p>Was it the moment you fell in love with storytelling? The first time a film moved you to tears, or a show made you stay up late because you genuinely couldn't bear to leave those characters behind? Was it the first time you realized that visual storytelling could do something no other medium could — could transport you, transform you, show you a world you'd never imagined?</p>
+<p>Or was it later? Was it the moment you needed a reason for why the queue always won? The moment you needed a label that made the endless evenings feel less like a compulsion and more like a personality?</p>
+<p>Think carefully. Because these are two very different things, and the Big Monster has spent years convincing you they're the same.</p>
+<h3 id="the-double-duty-label"><a class="header" href="#the-double-duty-label">The Double-Duty Label</a></h3>
+<p>You've described yourself this way for a long time. <em>I'm a TV person. I'm a cinephile. I'm just someone who loves stories.</em> The label feels comfortable, familiar, true. And it's been there for so long that questioning it feels almost like questioning your own reflection in the mirror.</p>
+<p>But here's something interesting about labels: They can do two jobs at once.</p>
+<p>If you met someone who said, "I'm a drinker — it's just who I am," would you assume they meant they enjoyed a fine wine with dinner? Or would you assume they meant they couldn't stop once they started?</p>
+<p>The phrase "I'm a drinker" can mean both things. It can mean a person who appreciates wine, who knows vintages, who enjoys the ritual of a good bottle shared with friends. And it can mean a person whose relationship with alcohol has tipped into compulsion — someone who drinks not for pleasure but because stopping feels impossible.</p>
+<p>The label lets the second thing hide inside the first, borrowing the legitimacy of genuine love to shield the compulsion from scrutiny.</p>
+<p>"I'm a TV person" works the same way. It can mean you genuinely love visual storytelling — that you're moved by great writing, great acting, great cinematography. That's real. That's valid. That's not going anywhere.</p>
+<p>But it can also mean something else. It can mean: <em>I watch for hours every night, even when I'm not enjoying it. I open the app without deciding to. I press "next" because stopping feels harder than continuing. And I call all of that "being a TV person" because the alternative — calling it what it actually is — feels too uncomfortable.</em></p>
+<p>The label lets the trap hide inside something legitimate. And as long as the label is in place, the trap never has to face the light.</p>
+<h3 id="the-genuine-love-test"><a class="header" href="#the-genuine-love-test">The Genuine Love Test</a></h3>
+<p>Now, let's be clear about something, because this matters more than almost anything else in this book.</p>
+<p>Your love of film is not the problem. Your love of storytelling is not the problem. Your appreciation for visual craft, for great performances, for narratives that move you and stay with you — none of that is the problem.</p>
+<p>Think about the films and shows that genuinely moved you. The ones you chose deliberately. The ones you watched with full attention, phone in another room, lights dimmed, no countdown running. The ones that ended, and you sat there for a moment afterward, feeling the weight of what you'd just experienced. The ones you carried with you for days, weeks, years.</p>
+<p>That love is real. And this book has no argument with it.</p>
+<p>But ask yourself this: Does the fact that you love a good meal mean you can't distinguish between a chosen dinner and an uncontrollable eating binge?</p>
+<p>Of course not. They're entirely different experiences. A chosen dinner is deliberate, time-bound, satisfying. It ends when the meal is done, and you leave the table feeling nourished. A binge is compulsive, endless, unsatisfying. It doesn't end because the meal is complete — it ends because you've exhausted yourself or run out of food.</p>
+<p>The love of food is not the same as the compulsion to overeat. And the love of film is not the same as the compulsion to binge-watch.</p>
+<p>The identity label conflates the two. It takes the genuine love and stretches it over the compulsion like a blanket, covering both. <em>I'm a cinephile, so of course I watch for hours every night. It's just who I am.</em></p>
+<p>But the love was never the problem. The compulsion was. And the two can be separated.</p>
+<h3 id="the-jacket-youve-worn-for-years"><a class="header" href="#the-jacket-youve-worn-for-years">The Jacket You've Worn for Years</a></h3>
+<p>You might be thinking, <em>But this is just the way I am. I've always been this way. The pattern is permanent. It's woven into me.</em></p>
+<p>Let's test that.</p>
+<p>You've watched yourself for years. The remote always within reach. The evening always ending in front of a screen. The hours slipping away, night after night. The pattern feels as permanent as your own heartbeat. It seems woven into the fabric of who you are.</p>
+<p>But here's a question: If you'd worn the same jacket every day for ten years, would the jacket become part of your body — or would it still be a jacket you could take off?</p>
+<p>The jacket would feel familiar, comfortable, like it belonged to you. But it would never become you. It would still be a garment—something you put on, something you could remove.</p>
+<p>The viewing pattern feels permanent because it's been repeated so many times. Repetition creates a sense of inevitability. But repetition isn't identity. The jacket can be taken off. The compulsion isn't who you are — it's what you've been doing.</p>
+<p>And what you've been doing can change.</p>
+<h3 id="the-permission-slip"><a class="header" href="#the-permission-slip">The Permission Slip</a></h3>
+<p>Here's where the identity claim does its most important work. And it's worth looking at closely.</p>
+<p>When you think about giving up the label — not the love, just the label — a small fear appears underneath. It sounds something like this:</p>
+<p><em>Who would I be without this? What would I talk about? What would fill the space where the screen used to be? I'd be less interesting. Less creative. Less me.</em></p>
+<p>That fear is worth examining. Because it reveals what the identity label was actually doing all along.</p>
+<p>What if the identity wasn't a description of who you are, but a permission slip for what you do?</p>
+<p>Think about it. When you call yourself a "TV person," what changes? Suddenly, the endless evenings make sense. The hours in front of the screen become not a problem to solve but a trait to accept. <em>I'm a TV person, so of course I watch for hours. That's what TV people do.</em> The label gives you permission—it normalizes the compulsion, turns the trap into a personality.</p>
+<p>The identity wasn't a truth. It was a justification. It was the Big Monster's way of making the compulsion feel acceptable, even inevitable.</p>
+<p>And once you see that — once you see the permission slip for what it is — the identity loses its grip. Because a permission slip can be withdrawn. A justification can be seen through. A label can be peeled off.</p>
+<h3 id="the-real-you-separated"><a class="header" href="#the-real-you-separated">The Real You, Separated</a></h3>
+<p>So now we come to the question that feels most destabilizing: If I'm not a TV person, then who am I?</p>
+<p>The question lands with a small thud. It feels like standing at the edge of something uncertain. The identity has been there for so long that imagining life without it feels like imagining life without a limb.</p>
+<p>But pause. Take a breath. And look carefully at what's actually being asked.</p>
+<p>The person who loves stories — is that person going anywhere? The person who values good writing, who appreciates visual craft, who gets genuinely excited about a well-made film — is that person being taken away?</p>
+<p>No. That person isn't going anywhere. That person was never the problem.</p>
+<p>What's being removed is not the love. It's the compulsion. Not the cinephile. The automatic, reflexive orbit around the queue. Not the person who chooses to watch something deliberately and turns it off when it's done. The person who opens the app without deciding to and loses an evening to the countdown.</p>
+<p>If you removed the compulsion from the equation, would your love of film disappear — or would it finally have room to breathe?</p>
+<p>Think about that. Without the compulsion, the love doesn't diminish—it expands. You'd no longer be watching out of habit, out of momentum, out of the inability to stop. You'd be watching because you genuinely wanted to, because a story caught your attention and held it, because you chose it.</p>
+<p>The love of film would stop being a cover for the habit and start being what it actually is: a genuine, enriching part of your life. Not smaller — larger. Not dimmer — clearer.</p>
+<p>Dismantling the identity doesn't destroy the love. It liberates it. The genuine cinephile remains. What falls away is the automatic, compulsive orbit around the queue. The real you isn't lost. The real you is freed.</p>
+<hr />
+<p>Here's the reframe:</p>
+<p>You were never a "TV person" in the way the trap told you. You were a person who loved stories and got caught in an endless queue. The love is real. The identity was a permission slip. Let the label go, and the love remains — finally free.</p>
+<p>And here's the strange, wonderful part: Once you stop using the label to justify the compulsion, you can actually enjoy stories more. Not less. More. Because now they're chosen. Now they're time-bound. Now they're yours.</p>
+<p>The trap never added anything to your love of film. It just borrowed it, wore it like a costume, and used it to keep you watching long after the love had gone to sleep.</p>
+<p>Take the love back. The costume falls away on its own.</p>
+<hr />
+<p>But there's another belief waiting, and it's one of the most social ones in the entire trap. It sounds like this: <em>I need to keep up with what everyone's watching. If I don't, I'll be out of the loop. I won't be able to participate in conversations. I'll be culturally irrelevant.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="06.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="08.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="06.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="08.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

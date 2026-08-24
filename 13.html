@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>&quot;At Least It&#x27;s Not Social Media&quot; - The Easy Way to Stop Binge-Watching</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">The Easy Way to Stop Binge-Watching</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>13: "At Least It's Not Social Media"</p>
+<p>If someone held a gun to your head and said "social media is worse than streaming," would that make your evenings feel any less empty?</p>
+<p>The question sounds absurd. But that's the logic of the harmlessness defense, and it's been protecting the trap for years.</p>
+<p>You know the reflex. The moment the habit is questioned, the mind reaches for comparisons. <em>Streaming isn't that bad. At least it's not social media. At least I'm not doomscrolling for hours. At least it's not drugs or gambling. This is the harmless option.</em></p>
+<p>It feels like perspective, like balance, like the voice of reason. But it's not. It's avoidance dressed up as wisdom.</p>
+<hr />
+<p>Here's the thing about comparisons: They change nothing about the thing itself.</p>
+<p>If you were eating fast food every night and someone pointed out that it was draining your energy and expanding your waistline, would saying "at least it's not heroin" make the fast food healthier? Would the comparison restore your energy? Would it undo the damage to your body?</p>
+<p>Of course not. The fast food would still be fast food. The effect on your body would still be the same. The existence of worse things in the world doesn't alter what the fast food is doing to you.</p>
+<p>The same is true of streaming. The effect it has on your evenings — the foggy head, the tired eyes, the stiff body, the hollow feeling when the screen goes dark — none of that is changed by the existence of social media. The comparison doesn't restore your energy. It doesn't give you back the hours. It doesn't make the habit any less compulsive.</p>
+<p>It just makes you feel better about it for a moment. And that moment of feeling better is exactly what the Parasite wants.</p>
+<hr />
+<p>Remember the Parasite — the thing we met back in Chapter 5? The mechanism that survives not by nourishing you, but by making you fear its absence? The thing that contributes nothing, but has convinced you that removing it would be fatal?</p>
+<p>The Parasite doesn't need to be the worst thing in your life. It just needs to be the least bad.</p>
+<p>Think about that. The Parasite isn't stupid. It doesn't try to compete with the most destructive compulsions. It doesn't say, <em>I'm better than heroin.</em> It says, <em>I'm better than social media. I'm better than doomscrolling. I'm better than the other things you could be doing.</em> It positions itself as the lesser evil, the acceptable compromise, the one habit you can keep without feeling too guilty.</p>
+<p>And the comparison works. You think, <em>Well, at least it's not that. At least I'm not like those people.</em> The defensiveness fades. The guilt recedes. The habit stays.</p>
+<p>The harmlessness defense is the Parasite's final costume. It's the last argument in the Big Monster's arsenal, and it's been remarkably effective. Because who wants to give up the one thing that feels harmless? Who wants to fight a battle against something that's "not that bad"?</p>
+<p>But the comparison was never evidence of harmlessness. It was evidence of the Parasite adapting its defense strategy. The harmlessness defense is just another way of saying <em>keep me.</em></p>
+<hr />
+<p>You might be thinking, <em>But the underlying experience is different. Streaming feels relaxing. Social media feels stressful. They're not the same thing at all.</em></p>
+<p>True. They feel different. Social media can feel jittery, comparative, anxious — the endless scroll of other people's curated lives, the ping of notifications, the low-grade envy and inadequacy. Streaming feels calm, absorbing, almost meditative. The narrative pulls you in and the world fades away.</p>
+<p>The flavor is different. No argument there.</p>
+<p>But if you're handcuffed with gold handcuffs instead of iron ones, are you any less trapped?</p>
+<p>The mechanism is the same. Opening an app without deciding to. Continuing past the point of satisfaction. Feeling unable to stop even when the experience has gone flat. Watching not because you're enjoying it, but because stopping feels harder than continuing.</p>
+<p>That's the trap. Not the specific content. Not the platform. Not the flavor. The trap is the loss of choice. And that loss of choice is identical whether you're scrolling a social feed or watching the next episode.</p>
+<p>The gold handcuffs feel nicer—shinier, less chafing—but they're still handcuffs. And comparing them to iron handcuffs doesn't unlock them.</p>
+<p>The flavor may be different, but the trap is the same. And as long as you're wearing the cuffs, you're not free.</p>
+<hr />
+<p>Now you might feel the pull to defend the habit one last time. The voice might say, <em>Okay, maybe it's not perfect. But it's still better than the alternatives. What's the harm in keeping it? Why not just let me have this?</em></p>
+<p>That question feels reasonable. It feels like the voice of a person who just wants to be left alone, who's tired of being told everything is a problem, who just wants to enjoy something without overanalyzing it.</p>
+<p>But the question is asking the wrong thing.</p>
+<p>What if the question isn't "is this the worst thing I could be doing?" but "is this actually giving me what I need?"</p>
+<p>That's the question the harmlessness defense avoids. It keeps the focus on the comparison — <em>at least it's not that</em> — so the real question never gets asked. It ranks compulsions instead of examining the one you actually have.</p>
+<p>But the ranking was never the point. The point is what the habit is doing to you. Is it serving you? Is it restoring you? Is it giving you what you actually need?</p>
+<p>By that measure, streaming fails. It drains your energy, fogs your mind, steals your sleep, and leaves you hollow and unsatisfied, reaching for the next episode in the hope that this one might finally deliver the satisfaction the last one didn't.</p>
+<p>It doesn't matter that social media might be worse. It doesn't matter that other people have worse habits. What matters is that the thing you're doing isn't working. And no amount of comparison changes that.</p>
+<hr />
+<p>Here's the reframe:</p>
+<p>The harmlessness defense is the Parasite's final costume. It doesn't need to be the worst thing in your life — it just needs to be the least bad. But comparing compulsions changes nothing. The mechanism is the same: loss of choice. What matters isn't whether streaming is better than social media. What matters is whether it's actually serving you. And it isn't.</p>
+<p>The next time the comparison reflex rises—<em>at least it's not that</em>—pause. Ask yourself: <em>Is this giving me what I need? Is this making my life better? Is this serving me, or am I serving it?</em></p>
+<p>The answer, by now, is clear.</p>
+<hr />
+<p>But this raises a deeper question. If streaming isn't serving you — if it was never the relaxation, the escape, the reward, the connection it claimed to be — then what were you actually hungry for all those evenings?</p>
+<p>What were you reaching for, underneath the remote?</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="12.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="14.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="12.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="14.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
